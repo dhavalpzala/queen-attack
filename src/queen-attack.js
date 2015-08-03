@@ -5,8 +5,7 @@
         $scope.check = function() {
             $scope.isAttackable = false;
             if (this.whiteQueenPosition && this.blackQueenPosition) {
-                var wQueenPosition = this.whiteQueenPosition.split(','), 
-                bQueenPosition = this.blackQueenPosition.split(',');
+                var wQueenPosition = this.whiteQueenPosition.split(','), bQueenPosition = this.blackQueenPosition.split(',');
                 if(wQueenPosition.length === 2 && bQueenPosition.length === 2){
                     chessObj.initPiece(chessObj.pieceType.whiteQueen, wQueenPosition[0], wQueenPosition[1]);
                     chessObj.initPiece(chessObj.pieceType.blackQueen, bQueenPosition[0], bQueenPosition[1]);

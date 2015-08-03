@@ -5,24 +5,21 @@ function chess() {
         blackQueen : 1
     };
     chessObj.initPiece = function(pieceType, row, column) {
-        if (row && column && !isNaN(row) && !isNaN(column)
-                && row < (size + startIndex) && column < (size + startIndex)
-                && row >= startIndex && column >= startIndex) {
-            pieces[pieceType] = {
-                row : row,
-                column : column
-            };
-        } else {
-            pieces[pieceType] = null;
-            return false;
+        pieces[pieceType] = null;
+        if (row && column && !isNaN(row) && !isNaN(column)) {
+            if (row < (size + startIndex) && column < (size + startIndex)
+                    && row >= startIndex && column >= startIndex) {
+                pieces[pieceType] = {
+                    row : row,
+                    column : column
+                };
+            }
         }
     };
     chessObj.canAttack = function(onePiece, otherPiece) {
-        var index, lastRowIndex = (startIndex + size) - 1, lastColumnIndex = (startIndex + size) - 1;
         if (pieces[onePiece] && pieces[otherPiece]) {
-            switch (onePiece) {
-            case this.pieceType.whiteQueen:
-            case this.pieceType.blackQueen:
+            if (onePiece === this.pieceType.whiteQueen
+                    || onePiece == this.pieceType.blackQueen) {
                 // row check - line equation x = c
                 if (pieces[onePiece].row === pieces[otherPiece].row) {
                     return true;
@@ -39,7 +36,6 @@ function chess() {
                 if (Math.abs(slope) === 1) {
                     return true;
                 }
-                break;
             }
         }
         return false;
