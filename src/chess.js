@@ -4,12 +4,16 @@ function chess() {
         whiteQueen : 0,
         blackQueen : 1
     };
+    function isValid(number) {
+        if (number) {
+            return !isNaN(number) && number < (size + startIndex)
+                    && number >= startIndex;
+        }
+        return false;
+    }
     obj.initPiece = function(pieceType, row, column) {
         pieces[pieceType] = null;
-        if ((row && column && !isNaN(row) && !isNaN(column))
-                && (row < (size + startIndex) && column < (size + startIndex)
-                        && row >= startIndex && column >= startIndex)) {
-            
+        if (isValid(row) && isValid(column)) {
             pieces[pieceType] = {
                 row : row,
                 column : column
@@ -20,9 +24,11 @@ function chess() {
     obj.canAttack = function(onePiece, otherPiece) {
         if (pieces[onePiece] && pieces[otherPiece]) {
             if (onePiece === this.pieceType.whiteQueen
-                    || onePiece == this.pieceType.blackQueen) {
-                // row check - line equation x = c and column check - line equation y = c
-                if (pieces[onePiece].row === pieces[otherPiece].row || pieces[onePiece].column === pieces[otherPiece].column) {
+                    || onePiece === this.pieceType.blackQueen) {
+                // row check - line equation x = c and column check - line
+                // equation y = c
+                if (pieces[onePiece].row === pieces[otherPiece].row
+                        || pieces[onePiece].column === pieces[otherPiece].column) {
                     return true;
                 }
 
@@ -33,10 +39,10 @@ function chess() {
                     return true;
                 }
             }
-            
+
             // other conditions will be here
-            else if(1){
-                
+            else if (1) {
+                return false;
             }
         }
         return false;
